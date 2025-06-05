@@ -2,6 +2,34 @@ import csv
 
 import numpy as np
 
+# --- NumPy FFT 기반 다항식 곱 ---
+def conv_fft(a, b):
+    """
+    NumPy FFT를 이용한 실수 다항식 컨볼루션.
+    * a, b : 정수 리스트 (또는 배열)
+    * 반환  : 정수 리스트 (길이 len(a)+len(b)-1)
+    """
+    # 필요 길이
+    need = len(a) + len(b) - 1
+    n = 1 << (need - 1).bit_length()  # 2^k >= need
+
+    # float64 배열 패딩
+    a_pad = np.zeros(n, dtype=np.float64)
+    b_pad = np.zeros(n, dtype=np.float64)
+    a_pad[: len(a)] = a
+    b_pad[: len(b)] = b
+
+    # FFT → 곱 → IFFT
+    fa = np.fft.fft(a_pad)
+    fb = np.fft.fft(b_pad)
+    fc = fa * fb
+    c_pad = np.fft.ifft(fc)
+
+    # 반올림 후 int64 캐스팅
+    c_int = np.rint(c_pad.real).astype(np.int64)
+    return c_int[:need].tolist()
+
+
 """
 메소드를 모아 놓은 파일
 """
@@ -27,7 +55,6 @@ def brute_force(reference_list, reads, M, L):
             for k in range(L):
                 if reference_list[j + k] != read[k]:
                     is_match = False
-                    break
             if is_match:
                 # 일치하는 부분이 발견되면 해당 위치에 read를 삽입
                 for k in range(L):
@@ -81,10 +108,9 @@ def packing(reference_list, reads, M):
         # read 다항식의 경우 역순으로 뒤집음
         inv_read_vec = read_vec_represented_by_root_of_unity[::-1]  # 역순으로 뒤집기
 
-        # C 는 fft 를 이용한 다항식 곱
-        C = np.polymul(np.array(inv_read_vec, dtype=np.int64), np.array(packed_reference, dtype=np.int64))
-        C = C % p 
-
+        # NumPy FFT 기반 다항식 곱
+        C = conv_fft(packed_reference, inv_read_vec)
+        C = [coef % p for coef in C]  # 모듈로 연산
         read_length = len(inv_read_vec)
         for k in range(len(C)):
             if C[k] == read_length:

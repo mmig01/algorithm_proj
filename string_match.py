@@ -25,8 +25,8 @@ if __name__ == "__main__":
     
 
     # 예시: L과 M을 입력 받아 read 생성 및 CSV 저장
-    L = 100  # 예시 값, 실제 실행 시 바꿔 입력 가능합니다.
-    M = 1000  # 예시 값, 실제 실행 시 바꿔 입력 가능합니다.
+    L = 200  # 예시 값, 실제 실행 시 바꿔 입력 가능합니다.
+    M = 500  # 예시 값, 실제 실행 시 바꿔 입력 가능합니다.
     reads = generate_reads(file_path=original_ref_path, csv_path=reads_list_csv_path, L=L, M=M)
     # read 순서를 무작위로 배치
     random.shuffle(reads)
