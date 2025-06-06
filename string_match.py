@@ -1,7 +1,7 @@
 import os
 import time
 import random
-from method import brute_force, generate_reads, get_reference_list, make_sequence_list, packing
+from project.method import brute_force, generate_reads, get_reference_list, make_sequence_list, packing
 
 
 """
@@ -20,10 +20,10 @@ main 함수가 있는 파일
 ========== 외부 라이브러리 사용 ===========
 라이브러리 : os
 """
-# 스크립트가 위치한 경로
-script_dir = os.path.dirname(os.path.realpath(__file__))
 
-# 그 디렉터리를 기준으로 상대경로 지정
+script_dir = os.path.dirname(os.path.abspath(__file__))  # 현재 스크립트의 디렉터리 경로
+
+# 현재 디렉터리를 기준으로 상대경로 지정
 original_ref_path = os.path.join(script_dir, "parameters/Original.txt")
 reference_list_csv_path  = os.path.join(script_dir, "parameters/sequence_list.csv")
 reads_list_csv_path = os.path.join(script_dir, "parameters/reads_list.csv")
