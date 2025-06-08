@@ -46,7 +46,7 @@ python -u "string_match.py 의 경로"
 # 파일구조
 
 1. parameters 폴더
-   - Original.txt : 50000 개의 레퍼런스가 저장 되어 있는 파일
+   - Original.txt : 50000 개의 염기서열이 저장 되어 있는 파일
    - sequence_list.csv : Original.txt 내부에 있는 레퍼런스를 list 형태로 변환 후 저장하는 파일
    - reads_list.csv : 패턴 매칭 알고리즘 실행 시, reference 로부터 생성된 read 가 저장되는 파일
    
