@@ -3,6 +3,38 @@
 
 # 실행법
 
+### 가상환경 설치
+
+1. 맥북
+
+```py
+# 가상환경 설치
+python3 -m venv venv
+
+# 가상환경 실행
+source venv/bin/activate
+```
+
+2. 윈도우
+
+```py
+# 가상환경 설치 
+python -m venv venv
+
+# 가상환경 실행
+source venv/Scripts/activate
+```
+
+
+
+### 필요 프로그램 설치
+
+```py
+pip install -r requirements.txt
+```
+
+### 프로그램 실행
+
 ```python
 python -u "string_match.py 의 경로"
 
