@@ -110,7 +110,7 @@ if __name__ == "__main__":
     """
     target_index = [30000, 30036, 30046, 30877, 30923, 30976, 31015, 31273, 31276, 31294]
     for idx in target_index:
-        print(f"Index: {idx}, 결과: {result_vec[idx]}, 정상 유전자: {reference_list[idx]}")
+        print(f"Index: {idx} 에서 복원된 염기 : {result_vec[idx]}, 정상 유전자: {reference_list[idx]}")
         if result_vec[idx] != reference_list[idx]:
             print(f"알츠하이머 발병 가능성이 높습니다.")
             break
